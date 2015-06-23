@@ -1,12 +1,13 @@
-import re, urllib
+import HTMLParser, urllib
 
-textfile=file('depth_1.txt','wt')
-print "Please enter the URL you wish to crawl:"
-print 'Usage - "http://phocks.org/stumble/creepy/" <--- with the double quotes'
-myurl = input("@> ")
-for i in re.findall('''href=["'](.[^"']+)["']''', urllib.urlopen(myurl).read(), re.I):
-	print i
-	for ee in re.findall('''href=["'](.[^"']+)["']''', urllib.urlopen(i).read(), re.I):
-		print ee
-		textfile.write(ee+'\n')
-textfile.close()
+urlText=[]
+
+class parseText(HTMLParser.HTMLParser):
+	def handle_data(self, data):
+		if data!= '\n'
+			urlText.append(data)
+			
+weblink = raw_input("Please enter the URL you wish to crawl:") # asks the user for a url 
+print "Currently opening", weblink	# prints out the url entered -- for testing purposes (FTPs)
+handle = urllib.urlopen(weblink)	# creates a variable handle which points to the url of interest
+html_gunk = handle.read() 		# sets a string 'html_gunk' equal to the html content read from the page
